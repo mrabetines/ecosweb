@@ -1,0 +1,95 @@
+<!-- Form horizontal -->
+<div class="panel panel-flat">
+  <div class="panel-heading">
+    <h5 class="panel-title">Filter Station</h5>
+    <div class="heading-elements">
+      <ul class="icons-list">
+        <li><a data-action="collapse"></a></li>
+        <li><a data-action="reload"></a></li>
+        <li><a data-action="close"></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <form class="form-horizontal" action="#">
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label>Domaine</label>
+          <select name="niveau" class="select-domaine">
+            <option value="0">Choisir domaine</option>
+            <option *ngFor="let item of domaines" value="{{item.id_Domaine}}">
+              {{item.nom}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Critére</label>
+          <select name="niveau" class="select-critere">
+            <option value="0">Choisir critére</option>
+            <option *ngFor="let item of criteres" value="{{item.id_Critere}}">
+              {{item.nom}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label>Contexte</label>
+          <select name="niveau" class="select-contexte">
+            <option value="0">Choisir contexte</option>
+            <option *ngFor="let item of contextes" value="{{item.id_Contexte}}">
+              {{item.nom}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Systeme</label>
+          <select name="niveau" class="select-systeme">
+            <option value="0">Choisir systeme</option>
+            <option *ngFor="let item of systemes" value="{{item.id_Systeme}}">
+              {{item.nom}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Type</label>
+          <select name="niveau" class="select-type">
+            <option value="0">Choisir type</option>
+            <option *ngFor="let item of types" value="{{item.id_Stage}}">
+              {{item.nom}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label>Compétence</label>
+          <select name="niveau" class="select-domaine">
+            <option value="0">Choisir competence</option>
+            <option *ngFor="let item of competences" value="{{item.id_Competence}}">
+              {{item.prefix}} : {{item.nom}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Critére</label>
+          <select name="niveau" class="select-critere">
+            <option value="0">Choisir critére</option>
+            <option *ngFor="let item of criteres" value="{{item.id_Critere}}">
+              {{item.nom}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row text-center">
+        <button type="submit" (click)="submitChanges()" class="btn btn-primary">Ajouter session <i
+          class="icon-arrow-right14 position-right"></i></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- /form horizontal -->

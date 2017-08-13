@@ -1,0 +1,239 @@
+<!-- Filter section -->
+<div class="panel panel-flat">
+  <div class="panel-heading">
+    <h5 class="panel-title">Filter Station</h5>
+    <div class="heading-elements">
+      <ul class="icons-list">
+        <li><a data-action="collapse"></a></li>
+        <li><a data-action="reload"></a></li>
+        <li><a data-action="close"></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label>Domaine</label>
+        <select name="niveau" class="select-domaine">
+          <option value="0">Choisir domaine</option>
+          <option *ngFor="let item of domaines" value="{{item.id_Domaine}}">
+            {{item.nom}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Critére</label>
+        <select name="niveau" class="select-critere">
+          <option value="0">Choisir critére</option>
+          <option *ngFor="let item of criteres" value="{{item.id_Critere}}">
+            {{item.nom}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label>Contexte</label>
+        <select name="niveau" class="select-contexte">
+          <option value="0">Choisir contexte</option>
+          <option *ngFor="let item of contextes" value="{{item.id_Contexte}}">
+            {{item.nom}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Systeme</label>
+        <select name="niveau" class="select-systeme">
+          <option value="0">Choisir systeme</option>
+          <option *ngFor="let item of systemes" value="{{item.id_Systeme}}">
+            {{item.nom}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Type</label>
+        <select name="niveau" class="select-type">
+          <option value="0">Choisir type</option>
+          <option *ngFor="let item of banqueTypes" value="{{item.id_BanqueType}}">
+            {{item.nom}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label>Compétence</label>
+        <select name="niveau" class="select-competence">
+          <option value="0">Choisir competence</option>
+          <option *ngFor="let item of competences" value="{{item.id_Competence}}">
+            {{item.prefix}} : {{item.nom}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <input type="text" value="Amsterdam,Washington,Sydney" class="competence-getter">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- List Station Filtred -->
+<div class="panel panel-flat">
+  <div class="panel-heading">
+    <h5 class="panel-title">List Stations</h5>
+    <div class="heading-elements">
+      <ul class="icons-list">
+        <li><a data-action="collapse"></a></li>
+        <li><a data-action="reload"></a></li>
+        <li><a data-action="close"></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel-body " style=" overflow-y: scroll;
+  height: 350px; ">
+    <table class="table datatable-html">
+      <thead>
+      <tr>
+        <th>Label</th>
+        <th>Domaine</th>
+        <th>Critere</th>
+        <th>Systeme</th>
+        <th>Contexte</th>
+        <th>Competence</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of banques">
+        <td>{{item.label}}</td>
+        <td>{{item.domaine.code}}</td>
+        <td>{{item.critere.code}}</td>
+        <td>{{item.systeme.code}}</td>
+        <td>{{item.contexte.code}}</td>
+        <td>{{item.competances}}</td>
+        <td class="text-center">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" class="control-success" checked="checked">
+            </label>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+</div>
+<!-- HTML sourced data -->
+<div class="panel panel-flat">
+  <div class="panel-heading">
+    <h5 class="panel-title">List Stations</h5>
+    <a (click)="changePonderation()" class="label label-primary">{{changePond ? 'Confirmer' : 'Edit pondérations'}}</a>
+    <div class="heading-elements">
+      <ul class="icons-list">
+        <li><a data-action="collapse"></a></li>
+        <li><a data-action="reload"></a></li>
+        <li><a data-action="close"></a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <table class="table datatable-html">
+    <thead>
+    <tr>
+      <th>Label</th>
+      <th>Ponderation</th>
+      <th>Systeme</th>
+      <th>Plainte</th>
+      <th>Contexte</th>
+      <th>Diagnostic</th>
+      <th>Items</th>
+      <th>Compétence</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let station of stations;let i=index">
+      <td class="text-semibold">{{station.banque.label}}</td>
+      <td>
+        <div *ngIf="!changePond">
+          {{station.ponderation}}
+        </div>
+        <div *ngIf="changePond">
+          <input type="text" class="form-control" [(ngModel)]="station.ponderation">
+        </div>
+      </td>
+      <td>{{station.banque.systeme.nom}}</td>
+      <td>{{station.banque.plainte.nom}}</td>
+      <td>{{station.banque.contexte.nom}}</td>
+      <td>{{station.banque.diagnostic}}</td>
+      <td>{{station.banque.items.length}}</td>
+      <td>
+        {{station.banque?.competances}}
+      </td>
+
+    </tr>
+    <tr class="text-semibold">
+      <td>
+        Totale
+      </td>
+      <td>
+        {{getTotalPonderation()}}
+      </td>
+      <td>
+        <a (click)="changePonderation()" class="label label-primary">{{changePond ? 'Confirmer' : 'Edit
+          pondérations'}}</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+</div>
+<!-- /HTML sourced data -->
+
+<div class="panel panel-flat">
+  <div class="panel-heading">
+    <h5 class="panel-title">Compétence evaluée et leur pondérations</h5>
+    <div class="heading-elements">
+      <ul class="icons-list">
+        <li><a data-action="collapse"></a></li>
+        <li><a data-action="reload"></a></li>
+        <li><a data-action="close"></a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <table class="table datatable-html">
+    <thead>
+    <tr>
+      <th></th>
+      <th *ngFor="let item of evaluations">{{item.prefix}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="text-semibold">Nombre d'items</td>
+      <td *ngFor="let item of evaluations">{{item.count}}</td>
+    </tr>
+    <tr>
+      <td class="text-semibold">Pondération</td>
+      <td *ngFor="let item of evaluations">{{item.ponderation}}</td>
+    </tr>
+
+    </tbody>
+  </table>
+
+  <div style="margin: 20px">
+  <span *ngFor="let item of evaluations">
+    <span class="text-semibold">{{item.prefix}} :</span>
+    <span>{{item.nom}}</span>
+  </span>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<!-- HTML sourced data -->
+<div class="panel panel-flat">
+  <div class="panel-heading">
+    <h5 class="panel-title">List Examens</h5>
+
+    <a (click)="goAddExamen()" class="label label-primary">Ajouter Examen</a>
+    <div class="heading-elements">
+      <ul class="icons-list">
+        <li><a data-action="collapse"></a></li>
+        <li><a data-action="reload"></a></li>
+        <li><a data-action="close"></a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <table class="table datatable-html">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Date</th>
+      <th>Type</th>
+      <th class="text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let examen of examens">
+      <td>{{examen.id_Examen}}</td>
+      <td class="text-semibold">{{examen.date}}</td>
+      <td>{{examen.stage.nom}}</td>
+      <td>
+        <a [routerLink]="['/session/examen/'+examen.id_Examen+'/station']" class="label label-warning">View stations</a>
+        <a [routerLink]="['/session/examen/'+examen.id_Examen+'/etudiant']" class="label label-warning">View students</a>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- /HTML sourced data -->

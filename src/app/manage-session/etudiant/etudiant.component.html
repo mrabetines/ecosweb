@@ -1,0 +1,45 @@
+<!-- HTML sourced data -->
+<div class="panel panel-flat">
+  <div class="panel-heading">
+    <h5 class="panel-title">List des étudiants</h5>
+    <div class="heading-elements">
+      <ul class="icons-list">
+        <li><a data-action="collapse"></a></li>
+        <li><a data-action="reload"></a></li>
+        <li><a data-action="close"></a></li>
+      </ul>
+    </div>
+  </div>
+  <table class="table datatable-html">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th>CIN</th>
+      <th>Carte d'étudiant</th>
+      <th>Presence</th>
+      <th class="text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etudiant of etudiants">
+      <td>{{etudiant.id_Etudiant}}</td>
+      <td>{{etudiant.nom}}</td>
+      <td>{{etudiant.prenom}}</td>
+      <td>{{etudiant.CIN}}</td>
+      <td>{{etudiant.carte_Etudiant}}</td>
+      <td>{{etudiant.present ? 'oui':'non'}}</td>
+     <!-- <td>
+        <a [routerLink]="['/session/examen/'+examen.id_Examen+'/station']" class="label label-warning">View stations</a>
+        <a [routerLink]="['/session/examen/'+examen.id_Examen+'/etudiant']" class="label label-warning">View students</a>
+      </td>-->
+    <td>
+        <button class="label bg-success" (click)="changePresence(etudiant.id_Etudiant,etudiant.present)">{{etudiant.present ? 'marquer absent' : ' marquer present'}}</button>
+    </td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- /HTML sourced data -->

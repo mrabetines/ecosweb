@@ -1,0 +1,127 @@
+<!-- Form horizontal -->
+<div class="panel panel-flat">
+  <div class="panel-heading">
+    <h5 class="panel-title">Ajouter Session</h5>
+    <div class="heading-elements">
+      <ul class="icons-list">
+        <li><a data-action="collapse"></a></li>
+        <li><a data-action="reload"></a></li>
+        <li><a data-action="close"></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel-body">
+
+    <form class="form-horizontal" action="#">
+      <div class="row">
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label class="control-label">Nom Session : </label>
+          <input [(ngModel)]="session.nom" name="nom" type="text" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+          <label>Niveau</label>
+          <select name="niveau" class="select-niveau">
+            <option value="0" disabled>Choisir niveau</option>
+            <option *ngFor="let item of niveaux" value="{{item.id_Niveau}}">
+              {{item.niveau}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Date debut: </label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+            <input type="text" class="form-control date-df date-debut">
+          </div>
+        </div>
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Date fin: </label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+            <input name="dateTest" type="text" class="form-control date-df date-fin">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Date publication: </label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+            <input name="dateTest" type="text" class="form-control date-dfI date-debutI">
+          </div>
+        </div>
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Date fin inscription: </label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+            <input name="dateTest" type="text" class="form-control date-dfI date-finI">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Medecin Observateur</label>
+          <select name="enseignant" class="select-enseignant">
+            <option value="0">Choisir medecin observateur</option>
+            <option *ngFor="let item of enseignants;let i=index" value="{{i}}">
+              {{item.nom}} {{item.prenom}}
+            </option>
+          </select>
+        </div>
+        <!-- Bordered striped table -->
+        <div class="col-md-6">
+          <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>CIN</th>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of selectedEnseignants;let i=index">
+              <td>{{item.id_Enseignant}}</td>
+              <td>{{item.CIN}}</td>
+              <td>{{item.nom}} {{item.prenom}}</td>
+              <td>
+                <a (click)="removeSelectedEnseignant(i)" data-popup="tooltip" title="Remove"><i class="icon-trash"></i></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /bordered striped table -->
+      </div>
+
+      <div *ngFor="let item of session.patients" class="row">
+        <div class="form-group col-md-4" style="    margin-right: 10px;">
+          <label class="control-label">Patient simulé : </label>
+          <input [(ngModel)]="item.CIN" placeholder="CIN" name="nom" type="text" class="form-control">
+        </div>
+        <div class="form-group col-md-4" style="    margin-right: 10px;margin-top: 7px">
+          <label class="control-label"></label>
+          <input [(ngModel)]="item.nom" name="Nom" placeholder="Nom" type="text" class="form-control">
+        </div>
+        <div class="form-group col-md-4" style="    margin-right: 10px; margin-top: 7px">
+          <label class="control-label"></label>
+          <input [(ngModel)]="item.prenom" name="nom" placeholder="Prénom" type="text" class="form-control">
+        </div>
+      </div>
+
+      <div class="row text-right">
+        <button type="submit" (click)="addPatient()" class="btn btn-warning">Ajout patient</button>
+      </div>
+      <div class="row text-center">
+        <button type="submit" (click)="addSession()" class="btn btn-primary">Ajouter session <i
+          class="icon-arrow-right14 position-right"></i></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- /form horizontal -->
