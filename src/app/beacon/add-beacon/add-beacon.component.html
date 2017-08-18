@@ -1,0 +1,69 @@
+<!-- Form horizontal -->
+<div class="panel panel-flat">
+  <div class="panel-heading">
+    <h5 *ngIf="beaconId == null" class="panel-title">Ajouter Beacon</h5>
+    <h5 *ngIf="beaconId != null" class="panel-title">Modifier Beacon</h5>
+    <div class="heading-elements">
+      <ul class="icons-list">
+        <li><a data-action="collapse"></a></li>
+        <li><a data-action="reload"></a></li>
+        <li><a data-action="close"></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <form #form="ngForm" class="form-horizontal" action="#" novalidate (ngSubmit)=" form.valid && addBeacon()">
+      <div class="row">
+        <div class="form-group col-md-6" style="margin-left:25%;text-align:center">
+          <label class="control-label">Uuid: </label>
+          <input (change)="exists()" [(ngModel)]="beacon.uuid" name="uuid" id="uuid"  class="form-control"  #uuid="ngModel" required>
+           <br>
+          <div *ngIf="uuid.invalid && (uuid.dirty || uuid.touched || form.submitted)" class="alert alert-danger">
+          <div *ngIf="uuid.errors.required">
+          uuid est obligatoire.
+          </div>
+         </div>
+        </div>
+      </div>
+        <div class="row">
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label class="control-label">Major: </label>
+          <input  (change)="exists()" [(ngModel)]="beacon.major" name="major" id="major" type="number" min="0" pattern="[0-9]+" class="form-control" #major="ngModel" required>
+         <br>
+          <div *ngIf="major.invalid && (major.dirty || major.touched ||form.submitted)" class="alert alert-danger">
+          <div *ngIf="major.errors.required">
+          major est obligatoire.
+          </div>
+        <div *ngIf="major.errors.pattern ">
+          major est un entier.
+          </div>
+         </div>
+        </div>
+         
+        <div class="form-group col-md-6">
+          <label class="control-label">Minor: </label>
+          <input (change)="exists()" [(ngModel)]="beacon.minor" name="minor" id="minor" type="number" min="0" pattern="[0-9]+" class="form-control" #minor="ngModel"required>
+         <br>
+          <div *ngIf="minor.invalid && (minor.dirty || minor.touched|| form.submitted)" class="alert alert-danger">
+          <div *ngIf="minor.errors.required">
+          minor est obligatoire.
+          </div>
+        <div *ngIf="minor.errors.pattern">
+          minor est un entier.
+          </div>
+         </div>
+        </div>
+      </div>
+        <div class="row text-center">
+        <button *ngIf="beaconId == null" class="btn btn-primary">Ajouter beacon<i
+          class="icon-arrow-right14 position-right"></i></button>
+          <button *ngIf="beaconId != null" class="btn btn-primary">Modifier beacon<i
+          class="icon-arrow-right14 position-right"></i></button>
+      </div>
+    </form>
+</div>
+</div>
+
+
+<!-- /form horizontal -->

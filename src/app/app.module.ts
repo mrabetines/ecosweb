@@ -19,13 +19,19 @@ import {StationService} from "./shared/services/station.service";
 import {SharedService} from "./shared/services/shared.service";
 import {BanqueService} from "./shared/services/banque.service";
 import {EtudiantService} from "./shared/services/etudiant.service";
-
+import {BeaconService} from "./shared/services/beacon.service";
+//added by ines
+import {AddBeaconComponent} from "./beacon/add-beacon/add-beacon.component";
+import {ListBeaconsComponent} from "./beacon/list-beacons/list-beacons.component";
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    FullLayoutComponent
+    FullLayoutComponent,
+    AddBeaconComponent,
+    ListBeaconsComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +40,8 @@ import {EtudiantService} from "./shared/services/etudiant.service";
     BrowserModule,
     LaddaModule,
     ManageSessionModule,
-    HttpModule
+    HttpModule,
+    ModalModule.forRoot()
   ],
   providers: [
     AuthService,
@@ -45,7 +52,8 @@ import {EtudiantService} from "./shared/services/etudiant.service";
     StationService,
     BanqueService ,
     SharedService,
-    EtudiantService
+    EtudiantService,
+    BeaconService
   ],
   bootstrap: [AppComponent]
 })

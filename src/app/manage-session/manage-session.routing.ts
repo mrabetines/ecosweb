@@ -11,7 +11,12 @@ import {ListExamensComponent} from "./examen/list-examens/list-examens.component
 import {ListStationsComponent} from "./station/list-stations/list-stations.component";
 import {AddSessionComponent} from "./session/add-session/add-session.component";
 import {AddExamenComponent} from "./examen/add-examen/add-examen.component";
+//added by ines
 import {EtudiantComponent} from "./etudiant/etudiant.component";
+import{ManageBeaconsComponent} from "./examen/manage-beacons/manage-beacons.component";
+import{AllocateBeaconsComponent} from "./examen/manage-beacons/allocate-beacons/allocate-beacons.component";
+import{DeallocateBeaconsComponent} from "./examen/manage-beacons/deallocate-beacons/deallocate-beacons.component";
+//import {BeaconComponent} from "./beacon/beacon.component";
 
 
 export const routes: Routes = [
@@ -47,11 +52,13 @@ export const routes: Routes = [
       {
         path: 'add',
         component: AddSessionComponent
-      }/*,
+      },
        {
-       path: 'add',
-       component: AddSessionComponent
-       }*/
+       path: 'examen/:examenId/beacons',
+       component: ManageBeaconsComponent,
+       }
+   
+    
     ]
   }
 ];

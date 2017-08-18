@@ -45,11 +45,8 @@ export class AddExamenComponent implements OnInit, AfterContentInit, OnDestroy {
         baseContext.sessionId = +params["sessionId"];
         baseContext.getStagesBySession();
       }
-    )
-
+    ) 
   }
-
-
   getListEnseignants() {
     this.sharedService.getAllEnseignant()
       .subscribe(
@@ -129,7 +126,7 @@ export class AddExamenComponent implements OnInit, AfterContentInit, OnDestroy {
 
   addExamen() {
     console.log(this.examen);
-
+    
     this.examenService.addExamen(this.examen, this.sessionId)
       .subscribe(
         (data) => {
@@ -140,6 +137,10 @@ export class AddExamenComponent implements OnInit, AfterContentInit, OnDestroy {
 
         }
       )
+      
+     
+
+
   }
 
 }

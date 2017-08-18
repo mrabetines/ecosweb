@@ -1,5 +1,5 @@
-import {Component, OnInit, AfterContentInit, OnDestroy} from '@angular/core';
-import {Router,ActivatedRoute} from "@angular/router";
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import {EtudiantService} from "../../shared/services/etudiant.service";
 import {Etudiant} from "app/shared/models/etudiant";
 import { Observable } from "rxjs/Observable";
@@ -19,6 +19,7 @@ export class EtudiantComponent implements OnInit,OnDestroy
   examenId: number;
   etudiants: Etudiant[] = [];
   subscription:any;
+
   ngOnInit(): void {
     this.route.params.subscribe(params =>{
     this.examenId=+params['examenId'];
@@ -42,7 +43,7 @@ export class EtudiantComponent implements OnInit,OnDestroy
         }
       );
   }
-  private checkAndAdd(arr,obj) {
+  checkAndAdd(arr,obj) {
   var id = arr.length + 1;
   var found = arr.some(function (el) {
     if((el.id_Etudiant === obj.id_Etudiant) && (el.present != obj.present))
@@ -56,34 +57,14 @@ export class EtudiantComponent implements OnInit,OnDestroy
   
   
 }
-  /*private addOrReplace( argh, obj ) {
-  var index = -1;
-  argh.filter((el, pos) => {
-    console.log("filter method "+obj.id_Etudiant);
-    if(( el.id_Etudiant === obj.id_Etudiant ) && (el.present != obj.present))
-      {argh[index = pos].present=obj.present;
-      console.log("if => obj: "+obj.id_Etudiant+ " el"+el.id_Etudiant);}
-    else  if ( el.id_Etudiant != obj.id_Etudiant )
-      {argh.push(obj);
-      index=pos;
-     console.log("else => obj: "+obj.id_Etudiant+ " el"+el.id_Etudiant); }
-     else {
-       index=pos;
-       return true;
-     }
-  });
-  if(index == -1)
-    {argh.push(obj);
-    console.log("index ==-1"+obj.id_Etudiant);}
-}*/
-  private subscribeToData(): void {
+  subscribeToData(): void {
   this.subscription = Observable.timer(10000).first().subscribe(() => 
   { 
     this.getListEtudiants(this.examenId);
   })
 }
 
-  private changePresence(etudiantId,present)
+  changePresence(etudiantId,present)
   { this.etudiantService.changePresence(this.examenId,etudiantId,present)
     .subscribe(
     (data)=>{ console.log(JSON.stringify(data.result));

@@ -2,7 +2,7 @@
  * Created by Abbes on 16/06/2017.
  */
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {NgModule} from '@angular/core';
 import {ManageSessionRoutingModule} from "./manage-session.routing";
 import {ListSessionsComponent} from "app/manage-session/session/list-sessions/list-session.component";
@@ -14,7 +14,11 @@ import {DateTimePickerModule} from 'ng-pick-datetime';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BusyModule} from 'angular2-busy';
 import {AddExamenComponent} from "./examen/add-examen/add-examen.component";
+//added by ines
 import {EtudiantComponent} from "./etudiant/etudiant.component";
+import{AllocateBeaconsComponent} from "./examen/manage-beacons/allocate-beacons/allocate-beacons.component";
+import{DeallocateBeaconsComponent} from "./examen/manage-beacons/deallocate-beacons/deallocate-beacons.component";
+import{ManageBeaconsComponent} from "./examen/manage-beacons/manage-beacons.component";
 
 @NgModule({
   imports: [
@@ -22,7 +26,8 @@ import {EtudiantComponent} from "./etudiant/etudiant.component";
     FormsModule,
     DateTimePickerModule,
     ManageSessionRoutingModule,
-    BusyModule
+    BusyModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ListSessionsComponent,
@@ -30,7 +35,11 @@ import {EtudiantComponent} from "./etudiant/etudiant.component";
     ListStationsComponent,
     AddSessionComponent,
     AddExamenComponent,
-    EtudiantComponent
+    EtudiantComponent ,
+    AllocateBeaconsComponent,
+    DeallocateBeaconsComponent,
+    ManageBeaconsComponent,
+    
   ],
   providers: []
 })
