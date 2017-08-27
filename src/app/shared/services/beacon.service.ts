@@ -15,8 +15,8 @@ export class BeaconService extends GenericService{
     }
     
     //récuperer la liste des beacons d'un examen donné
-    getListBeaconsByExam(exmamenId:number)
-    {  return this.http.post(Config.baseUrl2+"getbeaconsbyexam",{"id_Examen":exmamenId})
+    getListBeaconsByExam(examenId:number)
+    {  return this.http.get(Config.baseUrl2+"exam/"+examenId+"/beacons")
        .map( res => res.json())
        .catch(this.handleErrors);
     }
@@ -41,9 +41,9 @@ export class BeaconService extends GenericService{
         }
     
     // ajouter un beacon ou modfier
-    addBeacon(beacon)
+    addorupdateBeacon(beacon)
     {
-        return this.http.post(Config.baseUrl2+"addbeacon",{"id_Beacon":beacon.id_Beacon,"uuid":beacon.uuid,"major":beacon.major,"minor":beacon.minor})
+        return this.http.post(Config.baseUrl2+"addorupdatebeacon",{"id_Beacon":beacon.id_Beacon,"uuid":beacon.uuid,"major":beacon.major,"minor":beacon.minor})
         .map(res => res.json())
         .catch(this.handleErrors);
     }
@@ -70,7 +70,7 @@ export class BeaconService extends GenericService{
     //supprimer un beacon
     deleteBeacon(beaconId)
     {
-        return this.http.post(Config.baseUrl2+"deletebeacon",{"id_Beacon":beaconId})
+        return this.http.delete(Config.baseUrl2+"beacon/"+beaconId)
         .map(res =>res.json())
         .catch(this.handleErrors);
     }
@@ -78,7 +78,7 @@ export class BeaconService extends GenericService{
     //récuperer un beacon avec son id
     getBeacon(beaconId)
     {
-        return this.http.post(Config.baseUrl2+"getBeacon",{"id_Beacon":beaconId})
+        return this.http.get(Config.baseUrl2+"beacon/"+beaconId)
         .map(res => res.json())
         ._catch(this.handleErrors);
     }

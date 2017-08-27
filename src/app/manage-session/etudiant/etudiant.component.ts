@@ -27,10 +27,10 @@ export class EtudiantComponent implements OnInit,OnDestroy
   }
 
   getListEtudiants(examenId: number) {
-    this.etudiantService.getListEtudiants(examenId)
+    this.etudiantService.getListEtudiantsByExam(examenId)
       .subscribe(
         (data) => {
-                console.log(JSON.stringify(data));
+                //console.log(JSON.stringify(data));
                 data.result.forEach((etudiant) => {
                     //this.etudiants.push(new Etudiant (etudiant.id_Etudiant,etudiant.nom,etudiant.prenom,etudiant.CIN,etudiant.carte_Etudiant,etudiant.pivot.present));
                     this.checkAndAdd(this.etudiants,new Etudiant (etudiant.id_Etudiant,etudiant.nom,etudiant.prenom,etudiant.CIN,etudiant.carte_Etudiant,etudiant.pivot.present));

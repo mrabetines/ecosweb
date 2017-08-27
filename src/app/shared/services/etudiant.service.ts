@@ -10,8 +10,8 @@ export class EtudiantService extends GenericService {
     super();
   }
 
-  getListEtudiants(examenId: number) {
-    return this.http.post(Config.baseUrl2+"studentsbyexam",{"id_Examen":examenId})
+  getListEtudiantsByExam(examenId: number) {
+    return this.http.get(Config.baseUrl2+"exam/"+examenId+"/students")
       .map(res => res.json())
       .catch(this.handleErrors);
   }

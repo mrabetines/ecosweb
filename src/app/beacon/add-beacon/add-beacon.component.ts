@@ -37,12 +37,12 @@ valid:boolean=false;
       )
   }
 
-    addBeacon() {
+    addorupdateBeacon() {
       if(!this.valid)
     {alert("le beacon existe déja");}
     else
     {
-    this.beaconService.addBeacon(this.beacon)
+    this.beaconService.addorupdateBeacon(this.beacon)
       .subscribe(
         (data) => {
           console.log(data);
