@@ -6,5 +6,5 @@ export class Config {
 
   public static baseUrl = "http://137.74.165.25:8082/api";
 
-  public static baseUrl2="http://192.168.1.15/api/v1/";
+  public static baseUrl2="http://192.168.1.7/api/v1/";
 }

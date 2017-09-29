@@ -5,12 +5,11 @@ export class Beacon {
   public minor:number;
   public id_Examen:number;
 
-  constructor(id_Beacon?,uuid?,major?,minor?,id_Examen?)
+  constructor(id_Beacon?,uuid?,major?,minor?)
   { 
     this.id_Beacon=id_Beacon;
     this.uuid=uuid;
     this.major=major;
     this.minor=minor;
-    this.id_Examen=id_Examen;
   }
 }

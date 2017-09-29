@@ -1,4 +1,4 @@
-import { Injectable, Output, EventEmitter } from "@angular/core";
+import { Injectable/*, Output, EventEmitter*/ } from "@angular/core";
 import {Http} from '@angular/http';
 import {Config} from '../config';
 import { GenericService } from "app/shared/services/generic.service";
@@ -6,8 +6,8 @@ import { Beacon } from "app/shared/models/beacon";
 
 @Injectable()
 export class BeaconService extends GenericService{
-@Output() beaconDeletedEvent: EventEmitter<Beacon> = new EventEmitter(true);
-@Output() beaconsAddedEvent: EventEmitter<Beacon[]> = new EventEmitter(true);
+//@Output() beaconDeletedEvent: EventEmitter<Beacon> = new EventEmitter(true);
+//@Output() beaconsAddedEvent: EventEmitter<Beacon[]> = new EventEmitter(true);
     
     constructor(private http:Http)
     {
@@ -25,9 +25,6 @@ export class BeaconService extends GenericService{
     addBeaconsToExam(beacons:any[],exmamenId:number)
     {  return this.http.post(Config.baseUrl2+"setbeaconsbyexam",{"id_Examen":exmamenId,"id_Beacons":beacons})
        .map( res => res.json())
-       .do(data =>{
-           this.beaconsAddedEvent.emit(data.result);
-       })
        .catch(this.handleErrors);
 
     }
@@ -49,23 +46,27 @@ export class BeaconService extends GenericService{
     }
 
     //récuperer la liste des beacons non afféctés à des examens
-    getAllFreeBeacons()
+    getAllFreeBeacons(examenId)
     {
-            return this.http.get(Config.baseUrl2+"freebeacons")
+            return this.http.get(Config.baseUrl2+"freebeacons/"+examenId)
             .map(res => res.json())
+            .map(data => {
+                let freeBeaconsList = [];
+                data.result.forEach((element) => {
+                    freeBeaconsList.push(new Beacon(element.id_Beacon,element.uuid,element.major,element.minor));
+                });
+                return freeBeaconsList;
+              })
             .catch(this.handleErrors);
     }
 
     //désaffecter un beacon donné
-    retrieveBeaconFromExam(beaconId)
+    /*retrieveBeaconFromExam(beaconId)
     {
         return this.http.post(Config.baseUrl2+"retrievebeaconfromexam",{"id_Beacon":beaconId})
             .map(res => res.json())
-            .do(data => {
-                this.beaconDeletedEvent.emit(data.result);
-            })
             .catch(this.handleErrors);
-    }
+    }*/
     
     //supprimer un beacon
     deleteBeacon(beaconId)
@@ -80,7 +81,7 @@ export class BeaconService extends GenericService{
     {
         return this.http.get(Config.baseUrl2+"beacon/"+beaconId)
         .map(res => res.json())
-        ._catch(this.handleErrors);
+        .catch(this.handleErrors);
     }
     
     

@@ -1,16 +1,35 @@
- <div class="panel panel-flat">
-  <div class="panel-heading">
-    <h5 class="panel-title">Manage Beacons pour cet examen:</h5>
-    <div class="heading-elements">
-      <ul class="icons-list">
-        <li><a data-action="collapse"></a></li>
-        <li><a data-action="reload"></a></li>
-        <li><a data-action="close"></a></li>
-      </ul>
-    </div>
-  </div>
-<div class="panel-body">
-<allocate-beacons></allocate-beacons>
- <deallocate-beacons></deallocate-beacons>
+<!--<button type="button" class="btn btn-primary" (click)="openModal(template)">manage beacons</button>
+-->
+ <div class="modal-header">
+   <h4 class="modal-title pull-left">Ajout</h4>
+   <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+     <span aria-hidden="true">&times;</span>
+   </button>
  </div>
+ <div class="modal-body">
+    <form *ngIf="freeBeacons?.length != 0" class="form-horizontal" action="#">
+      <div class="row">
+       
+       <div class="form-group col-md-6">
+        <label>Beacons</label>
+          <select name="beacon" multiple="multiple" class="select-enseignant">
+          <option value="0" disabled>Choisir beacon</option>
+          <option *ngFor="let beacon of freeBeacons" value="{{beacon.id_Beacon}}">
+            {{beacon.uuid}} {{beacon.major}} {{beacon.minor}}
+          </option>
+        </select>
+        <label *ngIf="submitted&&session.enseignants.length===0" class="validation-error-label">Ce champs est
+          obligatoire.</label>
+      </div>
+      </div>
+       <div class="row">
+       <button type="submit"  (click)="affectBeacons()" class="btn btn-primary center-block">Ajouter Beacons </button>
+     </div>
+   </form>
+   <p class="text-center" *ngIf="freeBeacons?.length == 0">Y a pas des beacons libres</p>
  </div>
+
+
+
+
+<!-- /form horizontal -->
