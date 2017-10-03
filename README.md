@@ -10,7 +10,7 @@ Ce que j'ai ajouté:
 
     *Le service beacon.service.ts
 
-    *un ensemble de components pour affecter/désafecter les beacons (sous le dossier /manage-session/examen/manage-beacons).Ces components sont déclarés dans le module manage-session
+    *un component pour gérer  les beacons pour un examen précis (sous le dossier /manage-session/examen/manage-beacons).
     
     *un ensemble de components pour ajouter/supprimer/modifier les beacons (sous le dossier /beacon).Ces components sont déclarés dans le module app.
 
