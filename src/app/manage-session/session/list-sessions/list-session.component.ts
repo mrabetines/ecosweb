@@ -25,7 +25,7 @@ export class ListSessionsComponent implements OnInit {
     this.sessionService.getListSessions()
       .subscribe(
         (sessions) => {
-          this.sessions = sessions.data;
+          this.sessions = sessions;
         },
         (error) => {
 

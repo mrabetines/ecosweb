@@ -21,7 +21,6 @@
       <th>Uuid</th>
       <th>major</th>
       <th>minor</th>
-      <th>libre</th>
       <th class="text-center">Actions</th>
     </tr>
     </thead>
@@ -31,8 +30,6 @@
       <td>{{beacon.uuid}}</td>
       <td>{{beacon.major}}</td>
       <td>{{beacon.minor}}</td>
-      <td *ngIf="(beacon.id_Examen  | json) == 'null'">oui</td>
-      <td *ngIf="(beacon.id_Examen  | json) != 'null' ">non</td>
       <td>
         <a [routerLink]="['/beacon/'+beacon.id_Beacon+'/edit']" class="label label-warning">Modifier beacon</a>
         <a (click)="deleteBeacon(beacon.id_Beacon)" class="label label-warning">Supprimmer beacon</a> 

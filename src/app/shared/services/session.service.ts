@@ -20,9 +20,9 @@ export class SessionService extends GenericService {
 
   getListSessions() {
     this.headers.set("Authorization", "Bearer " + this.stoarageService.read("token"));
-    const url = Config.baseUrl + "/session";
+    const url = Config.baseUrl + "/session/list";
 
-    return this.http.get(url, {
+    return this.http.post(url, {"archive": false},{
       headers: this.headers
     })
       .map(res => res.json())

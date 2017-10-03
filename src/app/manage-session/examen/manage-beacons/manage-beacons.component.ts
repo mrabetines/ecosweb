@@ -15,21 +15,20 @@ export class ManageBeaconsComponent implements OnInit {
 
   public examenId:number;
   public freeBeacons:Beacon[];
-  public beacons:Beacon[];
-  public beaconsIds:Number[];
+  public beaconsIds:Number[]=[];
+  submitted=false;
 
   //@ViewChild('mytemplate') template:TemplateRef<any>;
 
   ngOnInit() {
-    this.initializeListBeaconSelect2();
+    
       setTimeout(() => {
       if (this.bsModalRef.content && this.bsModalRef.content.examenId) {
         this.examenId = this.bsModalRef.content.examenId;
         this.getListBeaconsByExam(this.examenId);
         this.getAllFreeBeacons(this.examenId);
-        setTimeout(() => {
-          this.setValueBeacons();
-      }, 1000)
+        this.initializeListBeaconSelect2();
+        
       }
     }, 0);	
        
@@ -44,27 +43,25 @@ export class ManageBeaconsComponent implements OnInit {
   }
 
   initializeListBeaconSelect2() {
-    const baseContext = this;
-    const selectEnseignant = jQuery(".select-enseignant");
-    selectEnseignant.select2();
-    selectEnseignant.on("select2:select", function (e) {
-        alert("here"+e.params.data.id);
-        baseContext.beaconsIds.push(parseInt(e.params.data.id));
+    const selectBeacon = jQuery(".select-beacon");
+    selectBeacon.select2();
+    selectBeacon.on("select2:select", (e) => {
+        console.log("select2:select", e.params.data.id);
+        this.beaconsIds.push(parseInt(e.params.data.id));
     });
-    selectEnseignant.on("select2:unselect", function (e) {
+    selectBeacon.on("select2:unselect", (e) => {
         console.log("select2:unselect", e.params.data.id);
-        const index = baseContext.beaconsIds.indexOf(parseInt(e.params.data.id), 0);
+        const index = this.beaconsIds.indexOf(parseInt(e.params.data.id), 0);
         if (index > -1) {
-            baseContext.beaconsIds.splice(index, 1);
+            this.beaconsIds.splice(index, 1);
         }
     });
 
   }
 
   setValueBeacons() {
-    const selectEnseignant = jQuery(".select-enseignant");
-    selectEnseignant.val([1]).trigger("change");
-    //selectEnseignant.change(this.beacons);
+    const selectBeacon = jQuery(".select-beacon");
+    selectBeacon.val(this.beaconsIds).trigger("change");
   }
 
   getAllFreeBeacons(examenId)
@@ -83,20 +80,34 @@ export class ManageBeaconsComponent implements OnInit {
     this.beaconService.getListBeaconsByExam(examenId)
     .subscribe(
       (data) => {
-     /*   data.result.forEach(beacon => {
+       data.result.forEach(beacon => {
           this.beaconsIds.push(beacon.id_Beacon)
-        });*/
-        this.beacons = data.result;
+        });
+        setTimeout(() =>{this.setValueBeacons()},0);
       },
       (error) => { }
     ) 
   }
 
+  validate()
+  { this.submitted=true;
+    if(this.beaconsIds.length===0)
+      {
+        return false;
+      }
+
+    else
+    {
+      return true;
+    }  
+
+  }
+
   affectBeacons()
-  {
+  { this.submitted=false;
     this.beaconService.addBeaconsToExam(this.beaconsIds,this.examenId)
     .subscribe(
-      () => {},
+      () => { this.bsModalRef.hide();},
       (error) => { }
     )
   }

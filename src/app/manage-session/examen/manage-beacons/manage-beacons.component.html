@@ -10,20 +10,20 @@
     <form *ngIf="freeBeacons?.length != 0" class="form-horizontal" action="#">
       <div class="row">
        
-       <div class="form-group col-md-6">
-        <label>Beacons</label>
-          <select name="beacon" multiple="multiple" class="select-enseignant">
+       <div class="form-group col-md-12">
+        <label>Beacons :</label>
+          <select name="beacon" multiple="multiple" class="select-beacon">
           <option value="0" disabled>Choisir beacon</option>
           <option *ngFor="let beacon of freeBeacons" value="{{beacon.id_Beacon}}">
-            {{beacon.uuid}} {{beacon.major}} {{beacon.minor}}
+            uuid:{{beacon.uuid}} major:{{beacon.major}} minor:{{beacon.minor}}
           </option>
         </select>
-        <label *ngIf="submitted&&session.enseignants.length===0" class="validation-error-label">Ce champs est
+        <label *ngIf="submitted&&beaconsIds.length===0" class="validation-error-label">Ce champs est
           obligatoire.</label>
       </div>
       </div>
        <div class="row">
-       <button type="submit"  (click)="affectBeacons()" class="btn btn-primary center-block">Ajouter Beacons </button>
+       <button type="submit"  (click)="validate()&&affectBeacons()" class="btn btn-primary center-block">Ajouter Beacons </button>
      </div>
    </form>
    <p class="text-center" *ngIf="freeBeacons?.length == 0">Y a pas des beacons libres</p>

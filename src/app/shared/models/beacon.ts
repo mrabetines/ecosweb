@@ -3,7 +3,6 @@ export class Beacon {
   public uuid: string ;
   public major: number;
   public minor:number;
-  public id_Examen:number;
 
   constructor(id_Beacon?,uuid?,major?,minor?)
   { 
