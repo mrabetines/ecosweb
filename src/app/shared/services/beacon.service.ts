@@ -40,7 +40,7 @@ export class BeaconService extends GenericService{
     // ajouter un beacon ou modfier
     addorupdateBeacon(beacon)
     {
-        return this.http.post(Config.baseUrl2+"addorupdatebeacon",{"id_Beacon":beacon.id_Beacon,"uuid":beacon.uuid,"major":beacon.major,"minor":beacon.minor})
+        return this.http.post(Config.baseUrl2+"addorupdatebeacon",{"id_Beacon":beacon.id_Beacon,"uuid":beacon.uuid,"major":beacon.major,"minor":beacon.minor,"code":beacon.code})
         .map(res => res.json())
         .catch(this.handleErrors);
     }
@@ -53,7 +53,7 @@ export class BeaconService extends GenericService{
             .map(data => {
                 let freeBeaconsList = [];
                 data.result.forEach((element) => {
-                    freeBeaconsList.push(new Beacon(element.id_Beacon,element.uuid,element.major,element.minor));
+                    freeBeaconsList.push(new Beacon(element.id_Beacon,element.uuid,element.major,element.minor,element.code));
                 });
                 return freeBeaconsList;
               })

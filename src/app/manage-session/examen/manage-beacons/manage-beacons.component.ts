@@ -16,7 +16,6 @@ export class ManageBeaconsComponent implements OnInit {
   public examenId:number;
   public freeBeacons:Beacon[];
   public beaconsIds:Number[]=[];
-  submitted=false;
 
   //@ViewChild('mytemplate') template:TemplateRef<any>;
 
@@ -89,22 +88,10 @@ export class ManageBeaconsComponent implements OnInit {
     ) 
   }
 
-  validate()
-  { this.submitted=true;
-    if(this.beaconsIds.length===0)
-      {
-        return false;
-      }
 
-    else
-    {
-      return true;
-    }  
-
-  }
 
   affectBeacons()
-  { this.submitted=false;
+  { 
     this.beaconService.addBeaconsToExam(this.beaconsIds,this.examenId)
     .subscribe(
       () => { this.bsModalRef.hide();},

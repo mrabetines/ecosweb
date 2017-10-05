@@ -29,40 +29,43 @@ valid:boolean=false;
            if (params.beaconId) {
             this.beaconId=+params['beaconId'];
            let index=this.beacons.findIndex(beacon => beacon.id_Beacon == this.beaconId);
-           this.beacon=this.beacons[index];
+           this.beacon.uuid=this.beacons[index].uuid;
+           this.beacon.major=this.beacons[index].major;
+           this.beacon.minor=this.beacons[index].minor;
+           this.beacon.code=this.beacons[index].code;
+           this.beacon.id_Beacon=this.beacons[index].id_Beacon;
           }  
         });
         },
         (error) => { }
       )
   }
-
+    //cette méthode peut etre optimisée (complexité)
     addorupdateBeacon() {
-      if(!this.valid)
-    {alert("le beacon existe déja");}
-    else
-    {
-    this.beaconService.addorupdateBeacon(this.beacon)
-      .subscribe(
-        (data) => {
-          console.log(data);
-          this.router.navigate(["/beacon"]);
-        },
-        (error) => {
-
-        });}
-      }
- 
-      exists(){
       this.valid=!this.beacons.some(beacon => {
-      //let test;
-      //console.log(beacon.uuid==beaconToAdd.uuid && beacon.major==beaconToAdd.major && beacon.minor==beaconToAdd.minor && beacon.id_Beacon!=beaconToAdd.id_Beacon);
+      console.log(beacon.code);
       return (beacon.uuid==this.beacon.uuid && beacon.major==this.beacon.major && beacon.minor==this.beacon.minor && beacon.id_Beacon!=this.beacon.id_Beacon);
-});
-  
-  }
+     });
+      if(!this.valid)
+      {
+        alert("le beacon existe déja");
+      }
+      else if(this.beacons.findIndex(beacon => (beacon.code === this.beacon.code)&& (beacon.id_Beacon != this.beacon.id_Beacon)) != -1 )
+      { console.log(this.beacons.findIndex(beacon => beacon.code === this.beacon.code));
+        alert("le code existe déja");
+      }
+      else
+      {
+        this.beaconService.addorupdateBeacon(this.beacon)
+        .subscribe(
+          (data) => {
+            console.log(data);
+            this.router.navigate(["/beacon"]);
+          },
+          (error) => {
 
-
+          });}
+      }
 }
 
 

@@ -16,8 +16,20 @@
     <form #form="ngForm" class="form-horizontal" action="#" novalidate (ngSubmit)=" form.valid && addorupdateBeacon()">
       <div class="row">
         <div class="form-group col-md-6" style="margin-left:25%;text-align:center">
+          <label class="control-label">Code: </label>
+          <input  [(ngModel)]="beacon.code" name="code" id="code"  class="form-control"  #code="ngModel" required>
+           <br>
+          <div *ngIf="code.invalid && (code.dirty || code.touched || form.submitted)" class="alert alert-danger">
+          <div *ngIf="code.errors.required">
+          code est obligatoire.
+          </div>
+         </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6" style="margin-left:25%;text-align:center">
           <label class="control-label">Uuid: </label>
-          <input (change)="exists()" [(ngModel)]="beacon.uuid" name="uuid" id="uuid"  class="form-control"  #uuid="ngModel" required>
+          <input [(ngModel)]="beacon.uuid" name="uuid" id="uuid"  class="form-control"  #uuid="ngModel" required>
            <br>
           <div *ngIf="uuid.invalid && (uuid.dirty || uuid.touched || form.submitted)" class="alert alert-danger">
           <div *ngIf="uuid.errors.required">
@@ -29,7 +41,7 @@
         <div class="row">
         <div class="form-group col-md-6" style="    margin-right: 10px;">
           <label class="control-label">Major: </label>
-          <input  (change)="exists()" [(ngModel)]="beacon.major" name="major" id="major" type="number" min="0" pattern="[0-9]+" class="form-control" #major="ngModel" required>
+          <input  [(ngModel)]="beacon.major" name="major" id="major" type="number" min="0" pattern="[0-9]+" class="form-control" #major="ngModel" required>
          <br>
           <div *ngIf="major.invalid && (major.dirty || major.touched ||form.submitted)" class="alert alert-danger">
           <div *ngIf="major.errors.required">
@@ -43,7 +55,7 @@
          
         <div class="form-group col-md-6">
           <label class="control-label">Minor: </label>
-          <input (change)="exists()" [(ngModel)]="beacon.minor" name="minor" id="minor" type="number" min="0" pattern="[0-9]+" class="form-control" #minor="ngModel"required>
+          <input  [(ngModel)]="beacon.minor" name="minor" id="minor" type="number" min="0" pattern="[0-9]+" class="form-control" #minor="ngModel"required>
          <br>
           <div *ngIf="minor.invalid && (minor.dirty || minor.touched|| form.submitted)" class="alert alert-danger">
           <div *ngIf="minor.errors.required">

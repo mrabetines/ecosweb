@@ -6,5 +6,5 @@ export class Config {
 
   public static baseUrl = "https://wsecos.vayetek.com/api";
 
-  public static baseUrl2="http://192.168.1.7/api/v1/";
+  public static baseUrl2="http://192.168.1.4/api/v1/";
 }
